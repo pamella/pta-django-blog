@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog Django | CITi - PTA</title>
+    <!-- favicon -->
+    <link rel="icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{% static 'icon/favicon.ico' %}" type="image/x-icon"/>
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,600i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <!-- HEADER -->
+    <section class="header">
+        <div class="header__logo">
+            <img class="header__img" src="{% static 'icon/logo.png' %}" alt="logo do CITi">
+        </div>
+        <span class="header__title">Blog Django</span>
+    </section>
+
+    <section class="posts">
+
+        <h2 class="posts__title_all-stories">All Stories</h2>
+        
+        {% for p in posts %}
+            <div class="post__card">
+
+                <!-- https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date -->
+                <span class="post__date">
+                    CREATED ON {{p.created_date | date:'d.m.y' }} AT {{p.created_date | time:'H:i'}} / UPDATED ON {{p.updated_date | date:'d.m.y' }} AT {{p.updated_date | time:'H:i'}}
+                </span>
+                <h1 class="post__title">{{ p.title }}</h1>
+                <span class="post__author">
+                        WRITE BY @{{ p.author }}
+                    </span>
+                <div class="post__text">{{ p.text }}</div>
+            </div>
+        {% endfor %}
+
+    </section>
+
+    <footer class="footer">
+        <span>&copy; 2018</span>
+        <span>
+            Made with <i class="fas fa-code"></i> and <i class="far fa-heart"></i>
+        </span>
+    </footer>
+
+</body>
+</html>
